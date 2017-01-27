@@ -74,3 +74,26 @@ tiend:	sw	$t0,0($a0)	# save updated result
 
   # you can write your code for subroutine "hexasc" below this line
   #
+hexasc:
+	move	$v0,$a0		# flytta till v0
+	li	$t0,1		# värde till loopvilkor
+	slti	$t1,$v0,10	#till loop
+	bne	$t1,$t0,letter 	# om not equal så är det en bokstav
+	addi	$v0,$v0,0x30	# till ASCII
+	jr	$ra
+	nop
+	
+	
+	
+letter:				#hör till hexasc:
+	addi	$v0,$v0,0x37	#för att få ASCII sstora bokstäver
+	jr	$ra		#hoppa tillbacka till return
+	nop			#just on case
+	
+#delayfunktion
+delay:
+	jr $ra
+	nop
+
+time2string:
+	
