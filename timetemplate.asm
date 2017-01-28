@@ -75,7 +75,8 @@ tiend:	sw	$t0,0($a0)	# save updated result
   # you can write your code for subroutine "hexasc" below this line
   #
 hexasc:
-	move	$v0,$a0		# flytta till v0
+	andi    $a1,$a1,0xf	#maska bort allt utom 4 minst signifikanta bitarna
+	move	$v0,$a1		# flytta till v0
 	li	$t0,1		# värde till loopvilkor
 	slti	$t1,$v0,10	#till loop
 	bne	$t1,$t0,letter 	# om not equal så är det en bokstav
@@ -96,4 +97,55 @@ delay:
 	nop
 
 time2string:
+	PUSH $ra
+	PUSH $s0
+	PUSH $s1
+	add $t0,$a1,0
+	addi $s0,$0,0x3a
+	addi $s1,$0,0x00
+	PUSH $a0
+	PUSH $a1
+	PUSH $t0
+	jal hexasc
+	nop
+	POP $t0
+	POP $a1
+	POP $a0
+	sb $v0,0x04($a0)
+	srl $a1,$a1,4
+	PUSH $a0
+	PUSH $a1
+	PUSH $t0
+	jal hexasc
+	nop
+	POP $t0
+	POP $a1
+	POP $a0
+	sb $v0,0x03($a0)
+	sb $s0,0x02($a0)
+	srl $a1,$a1,4
+	PUSH $a0
+	PUSH $a1
+	PUSH $t0
+	jal hexasc
+	nop
+	POP $t0
+	POP $a1
+	POP $a0
+	sb $v0,0x01($a0)
+	srl $a1,$a1,4
+	PUSH $a0
+	PUSH $a1
+	PUSH $t0
+	jal hexasc
+	nop
+	POP $t0
+	POP $a1
+	POP $a0
+	sb $v0,0x00($a0)
+	sb $s1,0x05($a0)
+	POP $s1
+	POP $s0
+	POP $ra
+	jr $ra
 	
