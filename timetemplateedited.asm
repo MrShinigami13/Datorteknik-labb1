@@ -24,7 +24,11 @@ main:
 	syscall
 	nop
 	# wait a little
+<<<<<<< HEAD
 	li	$a0,2
+=======
+	li	$a0,1000
+>>>>>>> origin/master
 	jal	delay
 	nop
 	# call tick
@@ -77,25 +81,61 @@ tiend:	sw	$t0,0($a0)	# save updated result
 hexasc:
 	andi    $a1,$a1,0xf	#maska bort allt utom 4 minst signifikanta bitarna
 	move	$v0,$a1		# flytta till v0
+<<<<<<< HEAD
 	li	$t0,1		# värde till loopvilkor
 	slti	$t1,$v0,10	#till loop
 	bne	$t1,$t0,letter 	# om not equal så är det en bokstav
+=======
+	li	$t0,1		# vï¿½rde till loopvilkor
+	slti	$t1,$v0,10	#till loop
+	bne	$t1,$t0,letter
+	nop 	# om not equal sï¿½ ï¿½r det en bokstav
+>>>>>>> origin/master
 	addi	$v0,$v0,0x30	# till ASCII
 	jr	$ra
 	nop
 	
 	
 	
+<<<<<<< HEAD
 letter:				#hör till hexasc:
 	addi	$v0,$v0,0x37	#för att få ASCII sstora bokstäver
+=======
+letter:				#hï¿½r till hexasc:
+	addi	$v0,$v0,0x37	#fï¿½r att fï¿½ ASCII sstora bokstï¿½ver
+>>>>>>> origin/master
 	jr	$ra		#hoppa tillbacka till return
 	nop			#just on case
 	
 #delayfunktion
 delay:
+<<<<<<< HEAD
 	jr $ra
 	nop
 
+=======
+	add	$t0,$0,$0
+	addi	$t1,$a0,0
+	addi	$t2,$0,1000
+	
+while:
+	ble	$t1,$t0,slut
+	nop
+	addi	$t1,$t1,-1
+	for:
+		beq	$t1,$t2,while
+		nop
+		addi	$t2,$t2,-1
+		j	for
+		nop
+		
+
+slut:
+
+	jr	$ra
+	nop
+#slut delay
+>>>>>>> origin/master
 time2string:
 	PUSH $ra
 	PUSH $s0
@@ -148,4 +188,9 @@ time2string:
 	POP $s0
 	POP $ra
 	jr $ra
+<<<<<<< HEAD
 	
+=======
+	nop
+	
+>>>>>>> origin/master
